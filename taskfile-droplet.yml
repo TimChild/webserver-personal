@@ -11,6 +11,8 @@ tasks:
       SIZE: '{{default "s-1vcpu-512mb-10gb" .SIZE}}'
       IMAGE: '{{default "ubuntu-24-04-x64" .IMAGE}}'
       REGION: '{{default "sfo3" .REGION}}'
+      SSH_KEY_NAME: '{{default "tim-linux" .SSH_KEY_NAME}}'
+      PROJECT: '{{default "Personal" .PROJECT}}'
       # add defaults for SSH_KEY_NAME and PROJECT for easier use
     preconditions:
       - sh: doctl compute size list | grep -q {{.SIZE}}
