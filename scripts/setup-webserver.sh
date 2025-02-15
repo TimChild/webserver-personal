@@ -52,7 +52,7 @@ sudo mkdir -p /srv/www
 mkdir -p ~/scripts
 
 # Start Caddy using docker-compose
-ln -s caddy-compose.yaml compose.yaml
+ln -s caddy-compose.yaml compose.yaml || warning "Failed to create symlink to caddy-compose.yaml (may already exist)"
 docker compose up -d || warning "Failed to start docker-compose... Start manually (e.g. may need to log in to docker registry first)"
 
 heading "Webserver setup complete (Caddy is running)"
