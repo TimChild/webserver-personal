@@ -16,6 +16,7 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./sites-enabled:/etc/caddy/sites-enabled
       - /srv:/srv
+      - ./logs/caddy:/var/log/caddy
       - caddy_data:/data
       - caddy_config:/config
 
