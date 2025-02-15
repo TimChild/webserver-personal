@@ -5,19 +5,34 @@ http://adventuresoftim.com http://www.adventuresoftim.com www.adventuresoftim.co
 
 adventuresoftim.com {
 	encode gzip
+	# Enable access logging
+	log {
+		output file /var/log/caddy/access.log {
+			mode 644
+			roll_size 10MiB
+		}
+		format console
+	}
+
+	# Enable error logging
+	handle_errors {
+		respond "{err.status_code} {err.status_text}: {err.message}"
+	}
+
 
 	@backend_routes path /_event/* /ping /_upload /_upload/*
 	handle @backend_routes {
 		reverse_proxy aot-backend:8000
 	}
 
-	@quarto path /quarto/*
-	handle @quarto {
+	handle_path /quarto/* {
 		root * /srv/www/aot-quarto
+		try_files {path} {path}/ /404.html
+		file_server
 	}
 
-	root * /srv/www/aot
-	route {
+	handle {
+		root * /srv/www/aot
 		try_files {path} {path}/ /404.html
 		file_server
 	}
