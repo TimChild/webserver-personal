@@ -29,7 +29,7 @@ adventuresoftim.com {
 	# File matcher to check if the request points to a valid quarto file
 	@isInQuarto file {
 		root /srv/www/aot-quarto
-		try_files {path} {path}.html
+		try_files {path} {path}/ {path}.html
 	}
 	handle @isInQuarto {
 		root * /srv/www/aot-quarto
