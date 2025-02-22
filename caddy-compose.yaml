@@ -36,3 +36,9 @@ services:
     container_name: aot-backend
     restart: unless-stopped
     env_file: "sites/aot/.env"
+
+  reflex-example-backend:
+    image: gchr.io/TimChild/reflex-example
+    container_name: reflex-example-backend
+    restart: unless-stopped
+    env_file: "sites/reflex-example/.env"
