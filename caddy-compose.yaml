@@ -3,6 +3,7 @@
 volumes:
   caddy_data:
   caddy_config:
+  reflex-example-db:
 
 services:
   caddy:
@@ -42,3 +43,5 @@ services:
     container_name: reflex-example-backend
     restart: unless-stopped
     env_file: "sites/reflex-example/.env"
+    volumes:
+      - reflex-example-db:/app/db
