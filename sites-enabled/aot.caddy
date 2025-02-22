@@ -27,6 +27,8 @@ adventuresoftim.com {
 	}
 
 	# File matcher to check if the request points to a valid quarto file
+	# NOTE: Do not catch {path}/ here as it captures the root path that should be 
+	# handled by aot nextjs -- instead check {path}/ in the catch-all handle block
 	@isInQuarto file {
 		root /srv/www/aot-quarto
 		try_files {path} {path}.html
@@ -51,7 +53,7 @@ adventuresoftim.com {
 	# Anything that didn't match -- serve the quarto 404 page
 	handle {
 		root * /srv/www/aot-quarto
-		try_files {path}/ /404.html  # Catch the quarto directories
+		try_files {path}/ /404.html  # NOTE: Check for {path}/ here instead
 		file_server
 	}
 }
