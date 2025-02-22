@@ -139,7 +139,7 @@ tasks:
       vars: [SSH_NAME, SITE_NAME, DOCKER_USER]
     vars:
       REGISTRY: '{{default "ghcr.io" .REGISTRY}}'
-      DOCKER_USER: '{{default "<set default here>" .DOCKER_USER}}'
+      DOCKER_USER: '{{default "timchild" .DOCKER_USER}}'
       DOCKERFILE_PATH: '{{default "Dockerfile" .DOCKERFILE_PATH}}'
       PROJECT_DIR: "{{default .USER_WORKING_DIR .PROJECT_DIR}}"
       _FULL_DOCKERFILE_PATH: "{{.PROJECT_DIR}}/{{.DOCKERFILE_PATH}}"
