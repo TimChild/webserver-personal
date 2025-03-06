@@ -1,6 +1,6 @@
 # Variables are: DOMAIN, SITE_NAME, BACKEND_SERVICE
 
-http://ceraviz.adventuresoftim.com http://www.ceraviz.adventuresoftim.com www.ceraviz.adventuresoftim.com {
+http://ceraviz.adventuresoftim.com {
 	redir https://ceraviz.adventuresoftim.com{uri}
 }
 
