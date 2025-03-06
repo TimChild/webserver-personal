@@ -53,3 +53,9 @@ services:
       - DATABASE_PATH=/root/db/database.db
     volumes:
       - ./dbs/ceraserver:/root/db
+  ceraviz-backend:
+    image: ghcr.io/timchild/ceraviz-backend:latest
+    container_name: ceraviz-backend
+    restart: unless-stopped
+    env_file: "sites/ceraviz/.env"
+

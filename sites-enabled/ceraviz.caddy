@@ -1,0 +1,21 @@
+# Variables are: DOMAIN, SITE_NAME, BACKEND_SERVICE
+
+http://ceraviz.adventuresoftim.com http://www.ceraviz.adventuresoftim.com www.ceraviz.adventuresoftim.com {
+	redir https://ceraviz.adventuresoftim.com{uri}
+}
+
+ceraviz.adventuresoftim.com {
+	encode gzip
+
+	@backend_routes path /_event/* /ping /_upload /_upload/*
+	handle @backend_routes {
+		reverse_proxy ceraviz-backend:8000
+	}
+
+	root * /srv/www/ceraviz
+	route {
+		try_files {path} {path}/ /404.html
+		file_server
+	}
+}
+
