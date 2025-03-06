@@ -184,3 +184,17 @@ tasks:
     cmds:
       # Fully stop and start in case any changes made to compose file
       - ssh {{.SSH_NAME}} "docker compose pull && docker compose down && docker compose up -d"
+
+  authenticate-docker-on-server:
+    desc: "docker auth login on the server"
+    dir: "{{.TASKFILE_DIR}}"
+    summary: |
+      Uses local GH_PAT to login to docker on websever.
+      This is required for manual deploy after automated builds run because automated runs
+      use the GitHub token from the workflow that is invalidated afterwards."
+    vars:
+      SSH_NAME: '{{default "webserver" .SSH_NAME}}'
+      GH_PAT:
+        sh: cat ./.gh_pat
+    cmds:
+      - ssh {{.SSH_NAME}} "echo {{.GH_PAT}} | docker login -u timchild ghcr.io --password-stdin"
