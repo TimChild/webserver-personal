@@ -1,0 +1,11 @@
+ceraserver.adventuresoftim.com {
+	encode gzip
+
+	# Enable error logging
+	handle_errors {
+		respond "{err.status_code} {err.status_text}: {err.message}"
+	}
+
+	reverse_proxy ceraserver:8080
+}
+

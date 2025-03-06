@@ -44,3 +44,12 @@ services:
     env_file: "sites/reflex-example/.env"
     volumes:
       - ./sites/reflex-example/db:/app/db
+
+  ceraserver:
+    image: ghcr.io/timchild/ceraserver:latest
+    container_name: ceraserver
+    restart: unless-stopped
+    environment:
+      - DATABASE_PATH=/root/db/database.db
+    volumes:
+      - ./dbs/ceraserver:/root/db
