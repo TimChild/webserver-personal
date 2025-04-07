@@ -1,0 +1,8 @@
+# Variables are: DOMAIN, SITE_NAME
+
+reflex-github-button-demo.adventuresoftim.com {
+	encode gzip
+
+	root * /srv/www/reflex-github-button-demo
+	file_server
+}
