@@ -21,6 +21,33 @@ adventuresoftim.com {
 	}
 
 
+	# --- Preview of the next site version (TimChild/adventuresoftim, deploy target=preview) ---
+	# Visit /_preview/on to opt in (sets a cookie), /_preview/off to opt out. Files that exist in
+	# /srv/www/aot-preview are served from there for opted-in browsers; everything else falls through.
+	handle /_preview/on {
+		header Set-Cookie "aot_preview=1; Path=/; Max-Age=604800; Secure; SameSite=Lax"
+		header Cache-Control "no-store"
+		redir * / 302
+	}
+	handle /_preview/off {
+		header Set-Cookie "aot_preview=; Path=/; Max-Age=0; Secure; SameSite=Lax"
+		header Cache-Control "no-store"
+		redir * / 302
+	}
+	@preview {
+		header Cookie *aot_preview=1*
+		file {
+			root /srv/www/aot-preview
+			try_files {path} {path}/
+		}
+	}
+	handle @preview {
+		header Cache-Control "no-store"
+		root * /srv/www/aot-preview
+		try_files {path} {path}/
+		file_server
+	}
+
 	@backend_routes path /_event/* /ping /_upload /_upload/*
 	handle @backend_routes {
 		reverse_proxy aot-backend:8000
