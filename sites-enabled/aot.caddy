@@ -77,11 +77,26 @@ adventuresoftim.com {
 		file_server
 	}
 
-	# Anything that didn't match -- serve the quarto 404 page
+	# Quarto directories (e.g. /guides/adding-a-post/) -- checked here rather than in
+	# @isInQuarto because {path}/ would capture the root path that belongs to the main site
+	@isQuartoDir file {
+		root /srv/www/aot-quarto
+		try_files {path}/
+	}
+	handle @isQuartoDir {
+		root * /srv/www/aot-quarto
+		try_files {path}/
+		file_server
+	}
+
+	# Anything that didn't match -- serve the quarto 404 page, with a real 404 status
+	# (a 200 here let Cloudflare cache the 404 page under asset URLs like /og.png)
 	handle {
 		root * /srv/www/aot-quarto
-		try_files {path}/ /404.html  # NOTE: Check for {path}/ here instead
-		file_server
+		rewrite * /404.html
+		file_server {
+			status 404
+		}
 	}
 }
 
