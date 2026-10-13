@@ -31,12 +31,6 @@ services:
   #   restart: unless-stopped
   #   env_file: "sites/<site-name>/.env"
 
-  aot-backend:
-    image: ghcr.io/timchild/aot-backend:latest
-    container_name: aot-backend
-    restart: unless-stopped
-    env_file: "sites/aot/.env"
-
   reflex-example-backend:
     image: ghcr.io/timchild/reflex-example-backend:latest
     container_name: reflex-example-backend

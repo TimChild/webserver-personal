@@ -48,11 +48,6 @@ adventuresoftim.com {
 		file_server
 	}
 
-	@backend_routes path /_event/* /ping /_upload /_upload/*
-	handle @backend_routes {
-		reverse_proxy aot-backend:8000
-	}
-
 	# File matcher to check if the request points to a valid quarto file
 	# NOTE: Do not catch {path}/ here as it captures the root path that should be 
 	# handled by aot nextjs -- instead check {path}/ in the catch-all handle block
